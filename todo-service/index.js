@@ -9,7 +9,7 @@ app.listen(PORT, () => {
   console.log("Server Listening on PORT:", PORT);
 });
 
-app.get("/status", (request, response) => {
+app.get("/todo/status", (request, response) => {
   const status = {
     Status: "Running",
   };
