@@ -9,6 +9,7 @@ const temp = [];
 function App() {
   const [data, setData] = useState(null);
   const [isLoggedIn, setLoggedIn] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     if (Cookies.get("userinfo")) {
@@ -21,6 +22,18 @@ function App() {
 
       console.log(encodedUserInfo);
       console.log(userInfo);
+    }
+  });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetch("/auth/userinfo")
+        .then((response) => response.json())
+        .then((json) => {
+          setUserInfo(json);
+          console.log(json)
+        })
+        .catch((error) => console.error(error));
     }
   });
 
