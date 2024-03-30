@@ -22,11 +22,7 @@ function App() {
 
       console.log(encodedUserInfo);
       console.log(userInfo);
-    }
-  });
 
-  useEffect(() => {
-    if (isLoggedIn) {
       fetch("/auth/userinfo")
         .then((response) => response.json())
         .then((json) => {
@@ -42,6 +38,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => {
         setData(json["items"]);
+        console.log("here")
       })
       .catch((error) => console.error(error));
   }, []);
