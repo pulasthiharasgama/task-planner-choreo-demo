@@ -1,0 +1,9 @@
+version: 0.1
+
+endpoints:
+  - name: Todo Endpoing
+    port: 3000
+    type: REST
+    networkVisibility: Public
+    context: /todo
+    schemaFilePath: openapi.yaml
