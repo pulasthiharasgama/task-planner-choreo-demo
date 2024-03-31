@@ -93,13 +93,14 @@ function App() {
         logoutHandler={logoutHandler}
       ></ResponsiveAppBar>
       <Container maxWidth="sm" sx={{ paddingTop: "50px" }}>
-        {reminders.map((rem) => (
-          <ReminderCard
-            dueDate={rem.dueDate}
-            reminderText={rem.reminderText}
-            reminderDescription={rem.reminderDescription}
-          ></ReminderCard>
-        ))}
+        {isLoggedIn &&
+          reminders.map((rem) => (
+            <ReminderCard
+              dueDate={rem.dueDate}
+              reminderText={rem.reminderText}
+              reminderDescription={rem.reminderDescription}
+            ></ReminderCard>
+          ))}
       </Container>
     </div>
   );
