@@ -12,7 +12,7 @@ app.listen(PORT, () => {
   console.log("Server Listening on PORT:", PORT);
 });
 
-app.get("/todo/temp", (request, response) => {
+app.get("/todo/status", (request, response) => {
   const temp = {
     items: ["one", "two", "three"],
   };
