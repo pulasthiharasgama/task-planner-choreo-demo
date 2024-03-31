@@ -36,8 +36,19 @@ function ResponsiveAppBar(props) {
     setAnchorElUser(null);
   };
 
+  const buttonStyle = {
+    backgroundColor: "#a96032",
+    "&:hover": {
+      backgroundColor: "#bf6f3d",
+    },
+    "&:active": {
+      backgroundColor: "#bf6f3d",
+    },
+    minWidth: '112px'
+  };
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#28954a" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#0e4c49" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <GradingIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -139,12 +150,17 @@ function ResponsiveAppBar(props) {
                 onClick={() => {
                   window.location.href = "/auth/login";
                 }}
+                sx={buttonStyle}
               >
                 Login
               </Button>
             )}
             {props.isLoggedIn && (
-              <Button variant="contained" onClick={props.logoutHander}>
+              <Button
+                variant="contained"
+                onClick={props.logoutHandler}
+                sx={buttonStyle}
+              >
                 Logout
               </Button>
             )}

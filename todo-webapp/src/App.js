@@ -23,7 +23,7 @@ function App() {
       fetch("/auth/userinfo")
         .then((response) => response.json())
         .then((json) => {
-          setUserInfo(json);
+          setUserInfo(JSON.stringify(json));
           sessionStorage.setItem("user", json);
         })
         .catch((error) => console.error(error));
@@ -35,7 +35,7 @@ function App() {
         "session_hint"
       )}`;
       sessionStorage.removeItem("userinfo");
-      sessionStorage.removeItem("userinfo");
+      sessionStorage.removeItem("user");
       
     }
 
