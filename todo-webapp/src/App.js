@@ -1,13 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar";
-import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
+import ReminderCard from "./Components/ReminderCard";
 
 const temp = [];
 function App() {
-  // const [data, setData] = useState(null);
   const [isLoggedIn, setLoggedIn] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -31,13 +30,51 @@ function App() {
   });
 
   const logoutHandler = async () => {
-      window.location.href = `/auth/logout?session_hint=${Cookies.get(
-        "session_hint"
-      )}`;
-      sessionStorage.removeItem("userinfo");
-      sessionStorage.removeItem("user");
-      
-    }
+    window.location.href = `/auth/logout?session_hint=${Cookies.get(
+      "session_hint"
+    )}`;
+    sessionStorage.removeItem("userinfo");
+    sessionStorage.removeItem("user");
+  };
+
+  const reminders = [
+    {
+      id: 1,
+      dueDate: "2024-04-05",
+      reminderText: "Meeting with clients",
+      reminderDescription: "Discuss project updates and timelines",
+    },
+    {
+      id: 2,
+      dueDate: "2024-04-10",
+      reminderText: "Pay rent",
+      reminderDescription: "Rent payment for apartment",
+    },
+    {
+      id: 3,
+      dueDate: "2024-04-15",
+      reminderText: "Submit report",
+      reminderDescription: "Quarterly sales report",
+    },
+    {
+      id: 4,
+      dueDate: "2024-04-20",
+      reminderText: "Buy groceries",
+      reminderDescription: "Weekly grocery shopping",
+    },
+    {
+      id: 5,
+      dueDate: "2024-04-25",
+      reminderText: "Doctor's appointment",
+      reminderDescription: "Checkup with Dr. Smith",
+    },
+    {
+      id: 6,
+      dueDate: "2024-04-30",
+      reminderText: "Submit tax returns",
+      reminderDescription: "Annual tax filing",
+    },
+  ];
 
   // useEffect(() => {
   //   fetch("http://localhost:5000/todo/temp")
@@ -55,6 +92,15 @@ function App() {
         isLoggedIn={isLoggedIn ? true : false}
         logoutHandler={logoutHandler}
       ></ResponsiveAppBar>
+      <Container maxWidth="sm" sx={{ paddingTop: "50px" }}>
+        {reminders.map((rem) => (
+          <ReminderCard
+            dueDate={rem.dueDate}
+            reminderText={rem.reminderText}
+            reminderDescription={rem.reminderDescription}
+          ></ReminderCard>
+        ))}
+      </Container>
     </div>
   );
 }
