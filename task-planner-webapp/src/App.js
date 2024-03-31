@@ -80,14 +80,16 @@ function App() {
   // ];
 
   useEffect(() => {
-    fetch(`${apiUrl}/tasks`)
-      .then((response) => response.json())
-      .then((json) => {
-        setReminders(json["data"]);
-        console.log("here");
-        console.log(json);
-      })
-      .catch((error) => console.error(error));
+    if (isLoggedIn) {
+      fetch(`${apiUrl}/tasks`)
+        .then((response) => response.json())
+        .then((json) => {
+          setReminders(json["data"]);
+          console.log("here");
+          console.log(json);
+        })
+        .catch((error) => console.error(error));
+    }
   }, []);
 
   return (
