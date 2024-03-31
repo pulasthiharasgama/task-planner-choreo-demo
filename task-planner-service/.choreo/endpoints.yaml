@@ -1,9 +1,9 @@
 version: 0.1
 
 endpoints:
-  - name: Todo Endpoint
+  - name: Task Planner Endpoint
     port: 8080
     type: REST
     networkVisibility: Public
-    context: /todo
+    context: /task-planner
     schemaFilePath: openapi.yaml
