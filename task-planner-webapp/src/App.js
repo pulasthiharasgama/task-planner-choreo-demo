@@ -9,6 +9,9 @@ const temp = [];
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [reminders, setReminders] = useState(null);
+
+  const apiUrl = window?.configs?.apiUrl ? window.configs.apiUrl : "/";
 
   useEffect(() => {
     if (Cookies.get("userinfo")) {
@@ -37,54 +40,55 @@ function App() {
     sessionStorage.removeItem("user");
   };
 
-  const reminders = [
-    {
-      id: 1,
-      dueDate: "2024-04-05",
-      reminderText: "Meeting with clients",
-      reminderDescription: "Discuss project updates and timelines",
-    },
-    {
-      id: 2,
-      dueDate: "2024-04-10",
-      reminderText: "Pay rent",
-      reminderDescription: "Rent payment for apartment",
-    },
-    {
-      id: 3,
-      dueDate: "2024-04-15",
-      reminderText: "Submit report",
-      reminderDescription: "Quarterly sales report",
-    },
-    {
-      id: 4,
-      dueDate: "2024-04-20",
-      reminderText: "Buy groceries",
-      reminderDescription: "Weekly grocery shopping",
-    },
-    {
-      id: 5,
-      dueDate: "2024-04-25",
-      reminderText: "Doctor's appointment",
-      reminderDescription: "Checkup with Dr. Smith",
-    },
-    {
-      id: 6,
-      dueDate: "2024-04-30",
-      reminderText: "Submit tax returns",
-      reminderDescription: "Annual tax filing",
-    },
-  ];
+  // const reminders = [
+  //   {
+  //     id: 1,
+  //     dueDate: "2024-04-05",
+  //     reminderText: "Meeting with clients",
+  //     reminderDescription: "Discuss project updates and timelines",
+  //   },
+  //   {
+  //     id: 2,
+  //     dueDate: "2024-04-10",
+  //     reminderText: "Pay rent",
+  //     reminderDescription: "Rent payment for apartment",
+  //   },
+  //   {
+  //     id: 3,
+  //     dueDate: "2024-04-15",
+  //     reminderText: "Submit report",
+  //     reminderDescription: "Quarterly sales report",
+  //   },
+  //   {
+  //     id: 4,
+  //     dueDate: "2024-04-20",
+  //     reminderText: "Buy groceries",
+  //     reminderDescription: "Weekly grocery shopping",
+  //   },
+  //   {
+  //     id: 5,
+  //     dueDate: "2024-04-25",
+  //     reminderText: "Doctor's appointment",
+  //     reminderDescription: "Checkup with Dr. Smith",
+  //   },
+  //   {
+  //     id: 6,
+  //     dueDate: "2024-04-30",
+  //     reminderText: "Submit tax returns",
+  //     reminderDescription: "Annual tax filing",
+  //   },
+  // ];
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/todo/temp")
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       setData(json["items"]);
-  //       console.log("here");
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
+  useEffect(() => {
+    fetch(`${apiUrl}/tasks`)
+      .then((response) => response.json())
+      .then((json) => {
+        setReminders(json["data"]);
+        console.log("here");
+        console.log(json);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div>
