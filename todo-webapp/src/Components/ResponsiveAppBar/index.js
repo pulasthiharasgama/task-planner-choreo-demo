@@ -126,14 +126,28 @@ function ResponsiveAppBar(props) {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0}}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
-                <Avatar alt="Remy Sharp" sx={{backgroundColor: '#72a97b'}}>
-                  <PersonIcon />
-                </Avatar>
-              </IconButton>
-            </Tooltip>
+          <Box sx={{ flexGrow: 0 }}>
+            {/* <Tooltip title="Open settings"> */}
+            {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}> */}
+            {/* <Avatar alt="Remy Sharp" sx={{backgroundColor: '#72a97b'}}>
+                </Avatar> */}
+            {/* </IconButton> */}
+            {/* </Tooltip> */}
+            {!props.isLoggedIn && (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  window.location.href = "/auth/login";
+                }}
+              >
+                Login
+              </Button>
+            )}
+            {props.isLoggedIn && (
+              <Button variant="contained" onClick={props.logoutHander}>
+                Logout
+              </Button>
+            )}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -150,11 +164,11 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {props.menuItems.map((setting) => (
+              {/* {props.menuItems.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
         </Toolbar>

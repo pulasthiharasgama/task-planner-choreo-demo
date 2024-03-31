@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 
 const temp = [];
 function App() {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [isLoggedIn, setLoggedIn] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -20,40 +20,41 @@ function App() {
       let userInfo = JSON.parse(atob(encodedUserInfo));
       setLoggedIn(true);
 
-      console.log(encodedUserInfo);
-      console.log(userInfo);
-
       fetch("/auth/userinfo")
         .then((response) => response.json())
         .then((json) => {
           setUserInfo(json);
-          console.log(json)
+          sessionStorage.setItem("user", json);
         })
         .catch((error) => console.error(error));
     }
   });
 
-  useEffect(() => {
-    fetch("http://localhost:5000/todo/temp")
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json["items"]);
-        console.log("here")
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  const logoutHandler = async () => {
+      window.location.href = `/auth/logout?session_hint=${Cookies.get(
+        "session_hint"
+      )}`;
+      sessionStorage.removeItem("userinfo");
+      sessionStorage.removeItem("userinfo");
+      
+    }
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/todo/temp")
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       setData(json["items"]);
+  //       console.log("here");
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   return (
     <div>
-      <ResponsiveAppBar menuItems={data ? data : temp}></ResponsiveAppBar>
-      <Button
-        variant="contained"
-        onClick={() => {
-          window.location.href = "/auth/login";
-        }}
-      >
-        Login
-      </Button>
+      <ResponsiveAppBar
+        isLoggedIn={isLoggedIn ? true : false}
+        logoutHandler={logoutHandler}
+      ></ResponsiveAppBar>
     </div>
   );
 }
