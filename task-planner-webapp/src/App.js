@@ -89,7 +89,7 @@ function App() {
         })
         .catch((error) => console.error(error));
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div>
