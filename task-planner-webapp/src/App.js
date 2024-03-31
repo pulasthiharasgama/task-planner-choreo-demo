@@ -5,7 +5,6 @@ import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import ReminderCard from "./Components/ReminderCard";
 
-const temp = [];
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
@@ -100,6 +99,7 @@ function App() {
       ></ResponsiveAppBar>
       <Container maxWidth="sm" sx={{ paddingTop: "50px" }}>
         {isLoggedIn &&
+          reminders &&
           reminders.map((rem) => (
             <ReminderCard
               dueDate={rem.dueDate}
