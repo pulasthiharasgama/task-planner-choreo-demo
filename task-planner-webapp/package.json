@@ -1,5 +1,5 @@
 {
-  "name": "todo-webapp",
+  "name": "task-planner-webapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
