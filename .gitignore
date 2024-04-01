@@ -2,3 +2,4 @@
 notes.md
 *.env*
 *table.sql*
+*.vscode*
