@@ -18,11 +18,17 @@ try:
     query = ("DROP TABLE IF EXISTS defaultdb.tasks;")
     cursor.execute(query)
 
+    print("Successfully dropped table")
+
     with open('schema.sql', encoding="utf8") as f:
         cursor.execute(f.read(), multi=True)
 
+    print("Successfully created table")
+
     with open('initial.sql', encoding="utf8") as f:
         cursor.execute(f.read(), multi=True)
+
+    print("Successfully added entries")
 
     db.commit()
     cursor.close()
@@ -30,3 +36,5 @@ try:
 
 except Exception as e:
     print(e)
+
+print("Successfully completed task")
