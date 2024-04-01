@@ -22,9 +22,9 @@ export default function ReminderCard(props) {
           {props.reminderDescription}
         </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Learn More</Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
