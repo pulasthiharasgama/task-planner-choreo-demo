@@ -1,0 +1,9 @@
+version: 0.1
+
+endpoints:
+  - name: Internal Task Planner Endpoint
+    port: 8080
+    type: REST
+    networkVisibility: Organization
+    context: /planner
+    schemaFilePath: openapi.yaml

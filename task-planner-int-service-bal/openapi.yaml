@@ -1,9 +1,9 @@
 openapi: "3.0.2"
 info:
-  title: Task Planner Application API
+  title: Internal Task Planner Application API
   version: "1.0"
 servers:
-  - url: http://localhost:5000
+  - url: http://localhost:8080
 paths:
   /tasks:
     get:
@@ -46,27 +46,23 @@ paths:
         "400":
           description: Bad Request
   /tasks/{id}:
-    delete:
-      summary: "Delete task with ID"
+    get:
+      summary: "Get task with ID"
       parameters:
         - in: path
           name: id
           schema:
             type: integer
           required: true
-          description: ID of the task to be deleted
+          description: ID of the task to be retrieved
 
       responses:
         "200":
-          description: Successfully deleted task
+          description: Successfully retrieved task
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum: ["success", "failed"]
+                $ref: "#/components/schemas/task"
         "400":
           description: Bad Request
         "404":

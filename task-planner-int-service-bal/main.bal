@@ -8,6 +8,9 @@ cache:Cache cache = new ();
 public service class Service {
     *http:Service;
 
+    @http:ResourceConfig {
+        cors: {allowOrigins: ["*"]}
+    }
     resource function get planner/tasks() returns json|error {
         string[] keys = cache.keys();
 
@@ -22,6 +25,9 @@ public service class Service {
         return resp;
     }
 
+    @http:ResourceConfig {
+        cors: {allowOrigins: ["*"]}
+    }
     resource function get planner/tasks/[int id]() returns json|error {
         if (cache.hasKey(id.toString())) {
             json val = <json>check cache.get(id.toString());
@@ -32,6 +38,9 @@ public service class Service {
         }
     }
 
+    @http:ResourceConfig {
+        cors: {allowOrigins: ["*"]}
+    }
     resource function post planner/tasks(@http:Payload TaskPayload payload) returns json|error {
         io:println("Invoked with payload: ", payload);
         check cache.put(payload.id.toString(), payload);
