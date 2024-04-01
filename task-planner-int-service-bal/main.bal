@@ -61,10 +61,32 @@ public function main() returns error? {
     http:Service plannerService = new Service();
     check httpListener.attach(plannerService);
 
-    string initialDataPath = "initialData.json";
-    json initialDataJson = check io:fileReadJson(initialDataPath);
-    json initialDataCopy = initialDataJson.cloneReadOnly();
-    TaskPayload[] initialData = <TaskPayload[]>initialDataCopy;
+    // string initialDataPath = "initialData.json";
+    // json initialDataJson = check io:fileReadJson(initialDataPath);
+    // json initialDataCopy = initialDataJson.cloneReadOnly();
+    // TaskPayload[] initialData = <TaskPayload[]>initialDataCopy;
+
+    // TODO remove after fixing build file missing issue
+    TaskPayload[] initialData = [
+        {
+            "id": 1,
+            "dueDate": "2024-04-05",
+            "reminderText": "Meeting with clients",
+            "reminderDescription": "Discuss project updates and timelines"
+        },
+        {
+            "id": 2,
+            "dueDate": "2024-04-10",
+            "reminderText": "Pay rent",
+            "reminderDescription": "Rent payment for apartment"
+        },
+        {
+            "id": 3,
+            "dueDate": "2024-04-15",
+            "reminderText": "Submit report",
+            "reminderDescription": "Quarterly sales report"
+        }
+    ];
 
     foreach TaskPayload entry in initialData {
         check cache.put(entry.id.toString(), entry);
